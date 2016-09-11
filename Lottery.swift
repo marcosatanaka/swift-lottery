@@ -1,34 +1,22 @@
 import UIKit
 
-let numerosSorteados = [1, 2, 3, 4, 5, 6]
+let numerosSorteados = [1, 2, 3, 4, 5, 6].sort(<)
 
-let numerosApostados = [[1, 2, 3, 4, 5, 6]
+let numerosApostados = [
+      [01, 02, 03, 04, 05, 06]
     , [12, 13, 14, 15, 16, 17]
     , [12, 13, 14, 15, 16, 17]
 ]
 
-var apostaNro = 0
-var qtdeAcertos = 0
+// Dentro da lista de pares contém algum par cujo primeiro elemento é diferente do segundo
+func acertouTodosNumeros (lhs: [Int], rhs: [Int]) -> Bool {
+    return lhs.count == rhs.count && !zip(lhs, rhs).contains { $0 != $1 }
+}
 
 for aposta in numerosApostados {
-    apostaNro++
-    print("Números acertados na aposta \(apostaNro):")
-    
-    for numeroApostado in aposta {
-        for numeroSorteado in numerosSorteados {
-            if numeroApostado == numeroSorteado {
-                qtdeAcertos++
-                print(numeroSorteado)
-            }
-        }
-    }
-    
-    if (qtdeAcertos == 6) {
-        print("Você ganhou!")
+    if (acertouTodosNumeros(aposta.sort(<), rhs: numerosSorteados)) {
+        print("Ganhou!")
     } else {
-        print("Você não ganhou!")
+        print("Não ganhou!")
     }
-    
-    qtdeAcertos = 0
-    print("")
 }
